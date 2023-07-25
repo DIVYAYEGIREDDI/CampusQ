@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>board</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/footer.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/answers.css}" />
+</head>
+
+<body>
+<div th:replace="~{header :: header}"></div>
+
+<div class="container">
+    <h1>Question</h1>
+    <div class="statement-list">
+        <div class="statement">
+            <h3 th:text="${question.student.toString()}"></h3>
+            <hr>
+            <p th:text="${question.description}"></p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h1>All Answers</h1>
+    <div class="statement-list">
+        <div th:each="answer : ${answers}" class="statement">
+            <h3 th:text="${answer.student.toString()}"></h3>
+            <hr>
+            <p th:text="${answer.description}"></p>
+            <div class="button-container">
+                <a class="btn btn-warning" th:href="@{/admin/admin_delete_answer(questionId=${answer.question.questionId}, answerId=${answer.answerId})}">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{footer :: footer}"></div>
+
+</body>
+</html>
